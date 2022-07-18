@@ -1,46 +1,46 @@
 import Settings
 
-hangLines = Settings.hangLines
-bodyShapes = Settings.bodyShapes
-invisibleChar = "\u200b"
-
 lines = []
-
-verticalLen = Settings.verticalLen
 
 
 def FillLines():
-    for i in range(0, verticalLen):
-        lines.append(invisibleChar)
+    global lines
+    lines = [None] * Settings.verticalLen
 
 
-def PrintAll():
+def PrintAll(hasHead, hasTorso, hasHands, hasLegs, letters):
     AddHang()
-    AddBody(True, True, True, True)
+    AddBody(hasHead, hasTorso, hasHands, hasLegs)
+    AddGuessed(letters)
+
     for i in range(0, len(lines)):
         print(lines[i])
 
 
-def AddHang(topLine=hangLines["topLine"], verticalShape=hangLines["verticalShape"], botLine=hangLines["botLine"]):
-    lines[0] = topLine
-    lines[-1] = botLine
-    for i in range(1, verticalLen - 1):
-        lines[i] = verticalShape
+def AddHang():
+    lines[0] = Settings.hangLines["topLine"]
+    lines[-1] = Settings.hangLines["botLine"]
+    for i in range(1, Settings.verticalLen - 1):
+        lines[i] = Settings.hangLines["verticalShape"]
 
 
-def AddBody(head=False, torso=False, hands=False, legs=False):
-    emptyAmount = len(hangLines["topLine"]) - len(hangLines["verticalShape"]) - 1
-    emptySpaces = ""
-    for i in range(0, emptyAmount):
-        emptySpaces += " "
-    if head:
-        lines[1] += emptySpaces + bodyShapes["head"]
-    if torso:
-        for i in range(2, 5):
-            lines[i] += emptySpaces + bodyShapes["torso"]
-    if hands:
+def AddBody(hasHead=False, hasTorso=False, hasHands=False, hasLegs=False):
+    emptyAmount = len(Settings.hangLines["topLine"]) - len(Settings.hangLines["verticalShape"])
+    emptySpaces = (emptyAmount - 1) * " "
+    bodyLen = 5
+
+    if hasHead:
+        lines[1] += emptySpaces + Settings.bodyShapes["head"]
+    if hasTorso:
+        for i in range(2, bodyLen):
+            lines[i] += emptySpaces + Settings.bodyShapes["torso"]
+    if hasHands:
         emptySpaces = emptySpaces[:-1]
-        lines[3] = hangLines["verticalShape"] + emptySpaces + bodyShapes["hands"]
-    if legs:
-        lines[5] += emptySpaces + bodyShapes["legs"]
+        lines[3] = Settings.hangLines["verticalShape"] + emptySpaces + Settings.bodyShapes["hands"]
+    if hasLegs:
+        lines[bodyLen] += emptySpaces + Settings.bodyShapes["legs"]
 
+
+def AddGuessed(letters):
+    emptySpaces = Settings.wordEmptySpace * " "
+    lines[6] += emptySpaces + letters
