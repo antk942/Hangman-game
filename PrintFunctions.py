@@ -8,10 +8,12 @@ def FillLines():
     lines = [None] * Settings.verticalLen
 
 
-def PrintAll(hasHead, hasTorso, hasHands, hasLegs, letters):
+def PrintAll(hasHead, hasTorso, hasHands, hasLegs, lettersFound):
+    FillLines()
     AddHang()
     AddBody(hasHead, hasTorso, hasHands, hasLegs)
-    AddGuessed(letters)
+    if lettersFound:
+        AddGuessed(lettersFound)
 
     for i in range(0, len(lines)):
         print(lines[i])
@@ -41,6 +43,6 @@ def AddBody(hasHead=False, hasTorso=False, hasHands=False, hasLegs=False):
         lines[bodyLen] += emptySpaces + Settings.bodyShapes["legs"]
 
 
-def AddGuessed(letters):
+def AddGuessed(lettersFound):
     emptySpaces = Settings.wordEmptySpace * " "
-    lines[6] += emptySpaces + letters
+    lines[6] += emptySpaces + lettersFound
