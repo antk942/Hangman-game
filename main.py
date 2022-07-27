@@ -1,4 +1,5 @@
 import PrintFunctions
+import Settings
 import WordHandler
 
 
@@ -11,14 +12,9 @@ def GetWordFromUser():  # Get a word from the user and return it, checking that 
             return wordGiven.lower()
 
 
-def WinSituation():  # Print the winning screen with the word completed and the current state of mistakes.
+def WinSituation(mistakes):  # Print the winning screen with the word completed and the current state of mistakes.
     PrintFunctions.PrintAll(mistakes, word.lower())
     print("GG")
-
-
-def MistakesSituation(mistakesMade):
-    for i in range(0, mistakesMade):
-        mistakes[i] = True
 
 
 def MainRun(letsFound):
@@ -42,27 +38,25 @@ def MainRun(letsFound):
         letsFound = rets[0]
         # Get the mistakes of the user until now.
         mistakesMade = rets[1]
-        MistakesSituation(mistakesMade)
 
         # Check if all the letters have been found to print the winning state.
         if letsFound == word.lower():
-            WinSituation()
+            WinSituation(mistakesMade)
             break
 
         # Print the next state with mistakes and the letters found until now.
-        PrintFunctions.PrintAll(mistakes, letsFound)
+        PrintFunctions.PrintAll(mistakesMade, letsFound)
 
         # Check if the user lost.
-        if mistakesMade > 3:
+        if mistakesMade > Settings.difficulty - 1:
             print("You lost :(")
             break
 
 
 if __name__ == '__main__':
-    mistakes = [False] * 4
     word = GetWordFromUser()
     # Print the first state where no mistakes have been made.
-    PrintFunctions.PrintAll(mistakes, "_" * len(word))
+    PrintFunctions.PrintAll(0, "_" * len(word))
 
     lettersFound = []
 

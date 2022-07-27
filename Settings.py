@@ -1,4 +1,4 @@
-# unicodes = https://www.w3.org/TR/xml-entity-names/025.html
+import string
 
 global hangLines
 hangLines = {
@@ -11,16 +11,18 @@ global bodyShapes
 bodyShapes = {
     "head": "▢",
     "torso": "┃",
-    "hands": "╱┃╲",
-    "legs": "╱ ╲"
+    "leftLimb": "╱",
+    "rightLimb": "╲"
 }
 
+global difficulty
+difficulty = 6
 
 global verticalLen
 verticalLen = 10
 
-global invisibleChar
-invisibleChar = "\u200b"
-
 global wordEmptySpace
 wordEmptySpace = 25
+
+global alphabetList
+alphabetList = list(string.ascii_lowercase)

@@ -32,16 +32,26 @@ def AddBody(mistakes):
     emptySpaces = (emptyAmount - 1) * " "  # Adding the empty space between the hanger graphics and the body graphics.
     bodyLen = 5
 
-    if mistakes[0]:
+    # Head.
+    if mistakes > 0:
         lines[1] += emptySpaces + Settings.bodyShapes["head"]
-    if mistakes[1]:
+    # Torso.
+    if mistakes > 1:
         for i in range(2, bodyLen):
             lines[i] += emptySpaces + Settings.bodyShapes["torso"]
-    if mistakes[2]:
+    # Hands.
+    if mistakes > 2:
+        lineList = list(lines[3])
+        lineList[-2] = Settings.bodyShapes["leftLimb"]
+        lines[3] = "".join(lineList)
+    if mistakes > 3:
+        lines[3] += Settings.bodyShapes["rightLimb"]
+    # Legs.
+    if mistakes > 4:
         emptySpaces = emptySpaces[:-1]
-        lines[3] = Settings.hangLines["verticalShape"] + emptySpaces + Settings.bodyShapes["hands"]
-    if mistakes[3]:
-        lines[bodyLen] += emptySpaces + Settings.bodyShapes["legs"]
+        lines[5] = Settings.hangLines["verticalShape"] + emptySpaces + Settings.bodyShapes["leftLimb"]
+    if mistakes > 5:
+        lines[5] += " " + Settings.bodyShapes["rightLimb"]
 
 
 def AddGuessed(lettersFound):  # Adding the guessed letters with an empty space between the word and the hanger.
