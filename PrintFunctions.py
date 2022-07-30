@@ -8,12 +8,14 @@ def FillLines():
     lines = [None] * Settings.verticalLen  # Make the lines list empty to handle the printing.
 
 
-def PrintAll(hasMistakes, lettersFound):
+def PrintAll():
     FillLines()  # Creating the lines list.
     AddHang()  # Adding the hanger.
-    AddBody(hasMistakes)  # Adding the body parts.
-    if lettersFound:  # If there are lettersFound add them.
-        AddGuessed(lettersFound)
+    AddBody()  # Adding the body parts.
+    if Settings.lettersFound:  # If there are lettersFound add them.
+        AddGuessed("".join(Settings.lettersFound))
+    else:
+        AddGuessed("_" * len(Settings.word))
 
     for i in range(0, len(lines)):  # Print the lines as a final result.
         print(lines[i])
@@ -26,7 +28,8 @@ def AddHang():  # Adding the graphics of the hanger in the lines.
         lines[i] = Settings.hangLines["verticalShape"]
 
 
-def AddBody(mistakes):
+def AddBody():
+    mistakes = Settings.mistakes
     # Adding the graphics of the body in the lines depending on the mistakes made.
     emptyAmount = len(Settings.hangLines["topLine"]) - len(Settings.hangLines["verticalShape"])
     emptySpaces = (emptyAmount - 1) * " "  # Adding the empty space between the hanger graphics and the body graphics.
@@ -57,3 +60,9 @@ def AddBody(mistakes):
 def AddGuessed(lettersFound):  # Adding the guessed letters with an empty space between the word and the hanger.
     emptySpaces = Settings.wordEmptySpace * " "
     lines[6] += emptySpaces + lettersFound
+
+
+def WinSituation():  # Print the winning screen with the word completed and the current state of mistakes.
+    Settings.lettersFound = Settings.word
+    PrintAll()
+    print("GG")

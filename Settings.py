@@ -26,3 +26,16 @@ wordEmptySpace = 25
 
 global alphabetList
 alphabetList = list(string.ascii_lowercase)
+
+global guessedWords
+guessedWords = []
+
+global lettersFound
+lettersFound = []
+
+global mistakes
+mistakes = 0
+
+global word
+word = ""
+
