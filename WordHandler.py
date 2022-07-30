@@ -1,3 +1,5 @@
+import Settings
+
 mistakes = 0
 
 
@@ -17,6 +19,10 @@ def WordHandler(word, lettersFound, letter):
 
 
 def LetterCheck(givenWord, lettersFound, letter):
+    if not DuplicateCheck(letter):
+        print("Give me a new letter.")
+        return None
+
     global mistakes
     if letter not in givenWord:
         mistakes += 1  # Increase the number of mistakes the user had.
@@ -29,3 +35,9 @@ def LetterCheck(givenWord, lettersFound, letter):
     return lettersFound  # Return the new lettersFound string.
 
 
+def DuplicateCheck(letter):
+    if letter in Settings.alphabetList:
+        Settings.alphabetList.remove(letter)
+        return True
+    else:
+        return False
