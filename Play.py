@@ -1,5 +1,3 @@
-import random
-
 import WordHandler
 import Settings
 import PrintFunctions
@@ -10,7 +8,8 @@ def Play(decision):
     word = Settings.word
     while True:
         if decision == "0":
-            userInput = AI.GetRandomLetter()
+            userInput = AI.GetWeightedLetter(AI.GanerateWeights())
+            print(userInput)
         else:
             userInput = input("Give me a letter or a guessed word: ")
             if not userInput.isalpha():  # Check if the letter or word contains something other than letters.

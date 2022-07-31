@@ -25,7 +25,8 @@ global wordEmptySpace
 wordEmptySpace = 25
 
 global alphabetList
-alphabetList = list(string.ascii_lowercase)
+alphabetList = ["e", "i", "a", "n", "o", "r", "s", "t", "l", "c", "u", "d", "p", "m", "h", "g", "y", "b", "f", "v", "k", "w", "z", "x", "q", "j"]
+# list(string.ascii_lowercase)
 
 global guessedWords
 guessedWords = []

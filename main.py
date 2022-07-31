@@ -1,7 +1,6 @@
 import PrintFunctions
 import WordHandler
 import Play
-import Settings
 
 
 def DecidePlayer():
