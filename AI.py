@@ -9,7 +9,7 @@ def GetRandomLetter():
     return letter
 
 
-def GanerateWeights():
+def GetWeightedLetter():
     weights = []
     alphabetLen = len(Settings.alphabetList)
 
@@ -19,9 +19,6 @@ def GanerateWeights():
         else:
             weights.append(weights[i - 1] / 1.3)
     print(weights)
-    return weights
 
-
-def GetWeightedLetter(weights):
     return random.choices(Settings.alphabetList, weights=tuple(weights), k=1)[0]
 

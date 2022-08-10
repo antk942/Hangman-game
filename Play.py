@@ -8,7 +8,7 @@ def Play(decision):
     word = Settings.word
     while True:
         if decision == "0":
-            userInput = AI.GetWeightedLetter(AI.GanerateWeights())
+            userInput = AI.GetWeightedLetter()
             print(userInput)
         else:
             userInput = input("Give me a letter or a guessed word: ")
